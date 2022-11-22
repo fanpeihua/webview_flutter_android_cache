@@ -1,0 +1,182 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="io.flutter.plugins.webviewflutterandroidexample"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="28" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:36:3-64
+14-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:36:20-62
+15    <!--
+16     When tests are ran on Firebase Test Lab, a wake lock
+17       permission failure prevents tests from running.
+18    -->
+19    <uses-permission android:name="android.permission.WAKE_LOCK" />
+19-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:41:3-66
+19-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:41:20-63
+20    <uses-permission android:name="android.permission.REORDER_TASKS" />
+20-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:24:5-72
+20-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:24:22-69
+21
+22    <application
+22-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:4:3-30:17
+23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+23-->[androidx.core:core:1.6.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e46cc16f2cf85a4504f63547e52be0e6\core-1.6.0\AndroidManifest.xml:24:18-86
+24        android:debuggable="true"
+25        android:icon="@mipmap/ic_launcher"
+25-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:6:5-39
+26        android:label="webview_flutter_example"
+26-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:7:5-44
+27        android:usesCleartextTraffic="true" >
+27-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:5:5-40
+28        <activity
+28-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:8:9-15:20
+29            android:name="io.flutter.plugins.webviewflutterexample.WebViewTestActivity"
+29-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:9:13-48
+30            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+30-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:12:13-163
+31            android:hardwareAccelerated="true"
+31-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:13:13-47
+32            android:launchMode="singleTop"
+32-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:10:13-43
+33            android:theme="@style/LaunchTheme"
+33-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:11:13-47
+34            android:windowSoftInputMode="adjustResize" >
+34-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:14:13-55
+35        </activity>
+36        <activity
+36-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:16:9-23:20
+37            android:name="io.flutter.plugins.webviewflutterexample.DriverExtensionActivity"
+37-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:17:17-56
+38            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+38-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:20:17-167
+39            android:hardwareAccelerated="true"
+39-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:21:17-51
+40            android:launchMode="singleTop"
+40-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:18:17-47
+41            android:theme="@style/LaunchTheme"
+41-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:19:17-51
+42            android:windowSoftInputMode="adjustResize" >
+42-->E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:22:17-59
+43        </activity>
+44
+45        <meta-data
+45-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:8:5-10:29
+46            android:name="flutterEmbedding"
+46-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:9:9-40
+47            android:value="2" />
+47-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:10:9-26
+48
+49        <activity
+49-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:11:5-29:16
+50            android:name="io.flutter.embedding.android.FlutterActivity"
+50-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:15:7-66
+51            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+51-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:12:7-138
+52            android:hardwareAccelerated="true"
+52-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:13:7-41
+53            android:launchMode="singleTop"
+53-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:14:7-37
+54            android:theme="@style/LaunchTheme"
+54-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:16:7-41
+55            android:windowSoftInputMode="adjustResize" >
+55-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:17:7-49
+56
+57            <!--
+58           This keeps the window background of the activity showing
+59           until Flutter renders its first frame. It can be removed if
+60           there is no splash screen (such as the default splash screen
+61           defined in @style/LaunchTheme).
+62            -->
+63            <meta-data
+63-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:22:7-24:31
+64                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
+64-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:23:9-74
+65                android:value="true" />
+65-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:24:9-29
+66
+67            <intent-filter>
+67-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:25:7-28:23
+68                <action android:name="android.intent.action.MAIN" />
+68-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:9-60
+68-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:17-58
+69
+70                <category android:name="android.intent.category.LAUNCHER" />
+70-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:27:9-68
+70-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:27:19-66
+71            </intent-filter>
+72        </activity>
+73        <activity
+73-->[:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-10:75
+74            android:name="io.flutter.plugins.webviewflutter.newActivity"
+74-->[:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-73
+75            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+75-->[:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-72
+76        <activity
+76-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:27:9-34:20
+77            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+77-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:28:13-99
+78            android:exported="true"
+78-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:29:13-36
+79            android:theme="@android:style/Theme" >
+79-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:30:13-49
+80            <intent-filter>
+80-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:31:13-33:29
+81                <action android:name="android.intent.action.MAIN" />
+81-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:9-60
+81-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:17-58
+82            </intent-filter>
+83        </activity>
+84        <activity
+84-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:35:9-42:20
+85            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+85-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:36:13-95
+86            android:exported="true"
+86-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:37:13-36
+87            android:theme="@android:style/Theme" >
+87-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:38:13-49
+88            <intent-filter>
+88-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:31:13-33:29
+89                <action android:name="android.intent.action.MAIN" />
+89-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:9-60
+89-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:17-58
+90            </intent-filter>
+91        </activity>
+92        <activity
+92-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:43:9-50:20
+93            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+93-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:44:13-103
+94            android:exported="true"
+94-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:45:13-36
+95            android:theme="@android:style/Theme.Dialog" >
+95-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:46:13-56
+96            <intent-filter>
+96-->[androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:31:13-33:29
+97                <action android:name="android.intent.action.MAIN" />
+97-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:9-60
+97-->E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:17-58
+98            </intent-filter>
+99        </activity>
+100
+101        <uses-library
+101-->[androidx.window:window:1.0.0-beta04] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e6e53bc32a12adc6583f7796b6784a51\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+102            android:name="androidx.window.extensions"
+102-->[androidx.window:window:1.0.0-beta04] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e6e53bc32a12adc6583f7796b6784a51\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+103            android:required="false" />
+103-->[androidx.window:window:1.0.0-beta04] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e6e53bc32a12adc6583f7796b6784a51\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+104        <uses-library
+104-->[androidx.window:window:1.0.0-beta04] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e6e53bc32a12adc6583f7796b6784a51\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+105            android:name="androidx.window.sidecar"
+105-->[androidx.window:window:1.0.0-beta04] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e6e53bc32a12adc6583f7796b6784a51\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+106            android:required="false" />
+106-->[androidx.window:window:1.0.0-beta04] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e6e53bc32a12adc6583f7796b6784a51\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+107    </application>
+108
+109</manifest>

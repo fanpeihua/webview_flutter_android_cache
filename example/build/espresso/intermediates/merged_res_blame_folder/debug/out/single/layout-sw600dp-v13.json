@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\AndroidMine\\webview_flutter_android\\example\\build\\espresso\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\mtrl_layout_snackbar.xml",
+        "source": "C:\\Users\\29466\\.gradle\\caches\\transforms-2\\files-2.1\\1965afa79bd88fc86bf774c86f77e0a3\\material-1.0.0\\res\\layout-sw600dp-v13\\mtrl_layout_snackbar.xml"
+    },
+    {
+        "merged": "E:\\AndroidMine\\webview_flutter_android\\example\\build\\espresso\\intermediates\\res\\merged\\debug\\layout-sw600dp-v13\\design_layout_snackbar.xml",
+        "source": "C:\\Users\\29466\\.gradle\\caches\\transforms-2\\files-2.1\\1965afa79bd88fc86bf774c86f77e0a3\\material-1.0.0\\res\\layout-sw600dp-v13\\design_layout_snackbar.xml"
+    }
+]

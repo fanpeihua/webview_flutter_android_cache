@@ -1,0 +1,8 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+io/flutter/plugins/webviewflutterexample/WebViewTestActivity.java
+ io.flutter.plugins.webviewflutterexample.WebViewTestActivity
+io/flutter/plugins/webviewflutterexample/DriverExtensionActivity.java
+ io.flutter.plugins.webviewflutterexample.DriverExtensionActivity
+io/flutter/plugins/webviewflutterexample/BuildConfig.java
+ io.flutter.plugins.webviewflutterexample.BuildConfig
