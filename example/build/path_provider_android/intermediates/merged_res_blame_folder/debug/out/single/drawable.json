@@ -1,18 +1,18 @@
 [
     {
-        "merged": "E:\\AndroidMine\\webview_flutter_android\\example\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_bg.xml",
-        "source": "C:\\Users\\29466\\.gradle\\caches\\transforms-2\\files-2.1\\e46cc16f2cf85a4504f63547e52be0e6\\core-1.6.0\\res\\drawable\\notification_bg.xml"
+        "merged": "E:\\project\\webview-android\\example\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\29466\\.gradle\\caches\\transforms-2\\files-2.1\\e46cc16f2cf85a4504f63547e52be0e6\\core-1.6.0\\res\\drawable\\notification_icon_background.xml"
     },
     {
-        "merged": "E:\\AndroidMine\\webview_flutter_android\\example\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_tile_bg.xml",
+        "merged": "E:\\project\\webview-android\\example\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_tile_bg.xml",
         "source": "C:\\Users\\29466\\.gradle\\caches\\transforms-2\\files-2.1\\e46cc16f2cf85a4504f63547e52be0e6\\core-1.6.0\\res\\drawable\\notification_tile_bg.xml"
     },
     {
-        "merged": "E:\\AndroidMine\\webview_flutter_android\\example\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_bg_low.xml",
+        "merged": "E:\\project\\webview-android\\example\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_bg_low.xml",
         "source": "C:\\Users\\29466\\.gradle\\caches\\transforms-2\\files-2.1\\e46cc16f2cf85a4504f63547e52be0e6\\core-1.6.0\\res\\drawable\\notification_bg_low.xml"
     },
     {
-        "merged": "E:\\AndroidMine\\webview_flutter_android\\example\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_icon_background.xml",
-        "source": "C:\\Users\\29466\\.gradle\\caches\\transforms-2\\files-2.1\\e46cc16f2cf85a4504f63547e52be0e6\\core-1.6.0\\res\\drawable\\notification_icon_background.xml"
+        "merged": "E:\\project\\webview-android\\example\\build\\path_provider_android\\intermediates\\res\\merged\\debug\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\29466\\.gradle\\caches\\transforms-2\\files-2.1\\e46cc16f2cf85a4504f63547e52be0e6\\core-1.6.0\\res\\drawable\\notification_bg.xml"
     }
 ]

@@ -1,10 +1,10 @@
 [
     {
-        "merged": "E:\\AndroidMine\\webview_flutter_android\\example\\build\\webview_flutter_android\\intermediates\\res\\merged\\debug\\anim\\dialog_in_anim.xml",
-        "source": "E:\\AndroidMine\\webview_flutter_android\\android\\src\\main\\res\\anim\\dialog_in_anim.xml"
+        "merged": "E:\\project\\webview-android\\example\\build\\webview_flutter_android\\intermediates\\res\\merged\\debug\\anim\\dialog_in_anim.xml",
+        "source": "E:\\project\\webview-android\\android\\src\\main\\res\\anim\\dialog_in_anim.xml"
     },
     {
-        "merged": "E:\\AndroidMine\\webview_flutter_android\\example\\build\\webview_flutter_android\\intermediates\\res\\merged\\debug\\anim\\dialog_out_anim.xml",
-        "source": "E:\\AndroidMine\\webview_flutter_android\\android\\src\\main\\res\\anim\\dialog_out_anim.xml"
+        "merged": "E:\\project\\webview-android\\example\\build\\webview_flutter_android\\intermediates\\res\\merged\\debug\\anim\\dialog_out_anim.xml",
+        "source": "E:\\project\\webview-android\\android\\src\\main\\res\\anim\\dialog_out_anim.xml"
     }
 ]

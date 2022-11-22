@@ -8,6 +8,6 @@
 8    package="dev.flutter.integration_test" >
 9
 10    <uses-sdk android:minSdkVersion="16" />
-10-->E:\flutterProject\flutter-3.3.4\flutter\packages\integration_test\android\src\main\AndroidManifest.xml
+10-->E:\flutterProject\flutter-2.10.4\flutter\packages\integration_test\android\src\main\AndroidManifest.xml
 11
 12</manifest>

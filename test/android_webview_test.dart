@@ -18,7 +18,6 @@ import 'test_android_webview.pigeon.dart';
   DownloadListener,
   JavaScriptChannel,
   TestDownloadListenerHostApi,
-  TestJavaObjectHostApi,
   TestJavaScriptChannelHostApi,
   TestWebChromeClientHostApi,
   TestWebSettingsHostApi,
@@ -34,58 +33,6 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Android WebView', () {
-    group('JavaObject', () {
-      late MockTestJavaObjectHostApi mockPlatformHostApi;
-
-      setUp(() {
-        mockPlatformHostApi = MockTestJavaObjectHostApi();
-        TestJavaObjectHostApi.setup(mockPlatformHostApi);
-      });
-
-      tearDown(() {
-        TestJavaObjectHostApi.setup(null);
-      });
-
-      test('JavaObject.dispose', () async {
-        int? callbackIdentifier;
-        final InstanceManager instanceManager = InstanceManager(
-          onWeakReferenceRemoved: (int identifier) {
-            callbackIdentifier = identifier;
-          },
-        );
-
-        final JavaObject object = JavaObject.detached(
-          instanceManager: instanceManager,
-        );
-        instanceManager.addHostCreatedInstance(object, 0);
-
-        JavaObject.dispose(object);
-
-        expect(callbackIdentifier, 0);
-      });
-
-      test('JavaObjectFlutterApi.dispose', () {
-        final InstanceManager instanceManager = InstanceManager(
-          onWeakReferenceRemoved: (_) {},
-        );
-
-        final JavaObject object = JavaObject.detached(
-          instanceManager: instanceManager,
-        );
-        instanceManager.addHostCreatedInstance(object, 0);
-        instanceManager.removeWeakReference(object);
-
-        expect(instanceManager.containsIdentifier(0), isTrue);
-
-        final JavaObjectFlutterApiImpl flutterApi = JavaObjectFlutterApiImpl(
-          instanceManager: instanceManager,
-        );
-        flutterApi.dispose(0);
-
-        expect(instanceManager.containsIdentifier(0), isFalse);
-      });
-    });
-
     group('WebView', () {
       late MockTestWebViewHostApi mockPlatformHostApi;
 
@@ -98,11 +45,11 @@ void main() {
         mockPlatformHostApi = MockTestWebViewHostApi();
         TestWebViewHostApi.setup(mockPlatformHostApi);
 
-        instanceManager = InstanceManager(onWeakReferenceRemoved: (_) {});
+        instanceManager = InstanceManager();
         WebView.api = WebViewHostApiImpl(instanceManager: instanceManager);
 
         webView = WebView();
-        webViewInstanceId = instanceManager.getIdentifier(webView)!;
+        webViewInstanceId = instanceManager.getInstanceId(webView)!;
       });
 
       test('create', () {
@@ -134,7 +81,7 @@ void main() {
       });
 
       test('loadData with null values', () {
-        webView.loadData(data: 'hello');
+        webView.loadData(data: 'hello', mimeType: null, encoding: null);
         verify(mockPlatformHostApi.loadData(
           webViewInstanceId,
           'hello',
@@ -252,15 +199,6 @@ void main() {
         expect(webView.getScrollY(), completion(56));
       });
 
-      test('getScrollPosition', () async {
-        when(mockPlatformHostApi.getScrollPosition(webViewInstanceId))
-            .thenReturn(WebViewPoint(x: 2, y: 16));
-        await expectLater(
-          webView.getScrollPosition(),
-          completion(const Offset(2.0, 16.0)),
-        );
-      });
-
       test('setWebViewClient', () {
         TestWebViewClientHostApi.setup(MockTestWebViewClientHostApi());
         WebViewClient.api = WebViewClientHostApiImpl(
@@ -268,12 +206,11 @@ void main() {
         );
 
         final WebViewClient mockWebViewClient = MockWebViewClient();
-        when(mockWebViewClient.copy()).thenReturn(MockWebViewClient());
         when(mockWebViewClient.shouldOverrideUrlLoading).thenReturn(false);
         webView.setWebViewClient(mockWebViewClient);
 
         final int webViewClientInstanceId =
-            instanceManager.getIdentifier(mockWebViewClient)!;
+            instanceManager.getInstanceId(mockWebViewClient)!;
         verify(mockPlatformHostApi.setWebViewClient(
           webViewInstanceId,
           webViewClientInstanceId,
@@ -287,13 +224,12 @@ void main() {
         );
 
         final JavaScriptChannel mockJavaScriptChannel = MockJavaScriptChannel();
-        when(mockJavaScriptChannel.copy()).thenReturn(MockJavaScriptChannel());
         when(mockJavaScriptChannel.channelName).thenReturn('aChannel');
 
         webView.addJavaScriptChannel(mockJavaScriptChannel);
 
         final int javaScriptChannelInstanceId =
-            instanceManager.getIdentifier(mockJavaScriptChannel)!;
+            instanceManager.getInstanceId(mockJavaScriptChannel)!;
         verify(mockPlatformHostApi.addJavaScriptChannel(
           webViewInstanceId,
           javaScriptChannelInstanceId,
@@ -307,7 +243,6 @@ void main() {
         );
 
         final JavaScriptChannel mockJavaScriptChannel = MockJavaScriptChannel();
-        when(mockJavaScriptChannel.copy()).thenReturn(MockJavaScriptChannel());
         when(mockJavaScriptChannel.channelName).thenReturn('aChannel');
 
         expect(
@@ -319,7 +254,7 @@ void main() {
         webView.removeJavaScriptChannel(mockJavaScriptChannel);
 
         final int javaScriptChannelInstanceId =
-            instanceManager.getIdentifier(mockJavaScriptChannel)!;
+            instanceManager.getInstanceId(mockJavaScriptChannel)!;
         verify(mockPlatformHostApi.removeJavaScriptChannel(
           webViewInstanceId,
           javaScriptChannelInstanceId,
@@ -333,11 +268,10 @@ void main() {
         );
 
         final DownloadListener mockDownloadListener = MockDownloadListener();
-        when(mockDownloadListener.copy()).thenReturn(MockDownloadListener());
         webView.setDownloadListener(mockDownloadListener);
 
         final int downloadListenerInstanceId =
-            instanceManager.getIdentifier(mockDownloadListener)!;
+            instanceManager.getInstanceId(mockDownloadListener)!;
         verify(mockPlatformHostApi.setDownloadListener(
           webViewInstanceId,
           downloadListenerInstanceId,
@@ -351,7 +285,6 @@ void main() {
           instanceManager: instanceManager,
         );
         final WebViewClient mockWebViewClient = MockWebViewClient();
-        when(mockWebViewClient.copy()).thenReturn(MockWebViewClient());
         when(mockWebViewClient.shouldOverrideUrlLoading).thenReturn(false);
         webView.setWebViewClient(mockWebViewClient);
 
@@ -361,11 +294,10 @@ void main() {
         );
 
         final WebChromeClient mockWebChromeClient = MockWebChromeClient();
-        when(mockWebChromeClient.copy()).thenReturn(MockWebChromeClient());
         webView.setWebChromeClient(mockWebChromeClient);
 
         final int webChromeClientInstanceId =
-            instanceManager.getIdentifier(mockWebChromeClient)!;
+            instanceManager.getInstanceId(mockWebChromeClient)!;
         verify(mockPlatformHostApi.setWebChromeClient(
           webViewInstanceId,
           webChromeClientInstanceId,
@@ -380,15 +312,11 @@ void main() {
         WebSettings.api =
             WebSettingsHostApiImpl(instanceManager: instanceManager);
         final int webSettingsInstanceId =
-            instanceManager.getIdentifier(webView.settings)!;
+            instanceManager.getInstanceId(webView.settings)!;
 
         webView.release();
         verify(mockWebSettingsPlatformHostApi.dispose(webSettingsInstanceId));
         verify(mockPlatformHostApi.dispose(webViewInstanceId));
-      });
-
-      test('copy', () {
-        expect(webView.copy(), isA<WebView>());
       });
     });
 
@@ -401,7 +329,7 @@ void main() {
       late int webSettingsInstanceId;
 
       setUp(() {
-        instanceManager = InstanceManager(onWeakReferenceRemoved: (_) {});
+        instanceManager = InstanceManager();
 
         TestWebViewHostApi.setup(MockTestWebViewHostApi());
         WebView.api = WebViewHostApiImpl(instanceManager: instanceManager);
@@ -414,7 +342,7 @@ void main() {
         );
 
         webSettings = WebSettings(WebView());
-        webSettingsInstanceId = instanceManager.getIdentifier(webSettings)!;
+        webSettingsInstanceId = instanceManager.getInstanceId(webSettings)!;
       });
 
       test('create', () {
@@ -516,10 +444,6 @@ void main() {
           true,
         ));
       });
-
-      test('copy', () {
-        expect(webSettings.copy(), isA<WebSettings>());
-      });
     });
 
     group('JavaScriptChannel', () {
@@ -531,16 +455,14 @@ void main() {
       late int mockJavaScriptChannelInstanceId;
 
       setUp(() {
-        instanceManager = InstanceManager(onWeakReferenceRemoved: (_) {});
+        instanceManager = InstanceManager();
         flutterApi = JavaScriptChannelFlutterApiImpl(
           instanceManager: instanceManager,
         );
 
         mockJavaScriptChannel = MockJavaScriptChannel();
-        when(mockJavaScriptChannel.copy()).thenReturn(MockJavaScriptChannel());
-
         mockJavaScriptChannelInstanceId =
-            instanceManager.addDartCreatedInstance(mockJavaScriptChannel);
+            instanceManager.tryAddInstance(mockJavaScriptChannel)!;
       });
 
       test('postMessage', () {
@@ -549,13 +471,6 @@ void main() {
           'Hello, World!',
         );
         verify(mockJavaScriptChannel.postMessage('Hello, World!'));
-      });
-
-      test('copy', () {
-        expect(
-          JavaScriptChannel.detached('channel').copy(),
-          isA<JavaScriptChannel>(),
-        );
       });
     });
 
@@ -571,20 +486,17 @@ void main() {
       late int mockWebViewInstanceId;
 
       setUp(() {
-        instanceManager = InstanceManager(onWeakReferenceRemoved: (_) {});
+        instanceManager = InstanceManager();
         flutterApi = WebViewClientFlutterApiImpl(
           instanceManager: instanceManager,
         );
 
         mockWebViewClient = MockWebViewClient();
-        when(mockWebViewClient.copy()).thenReturn(MockWebViewClient());
         mockWebViewClientInstanceId =
-            instanceManager.addDartCreatedInstance(mockWebViewClient);
+            instanceManager.tryAddInstance(mockWebViewClient)!;
 
         mockWebView = MockWebView();
-        when(mockWebView.copy()).thenReturn(MockWebView());
-        mockWebViewInstanceId =
-            instanceManager.addDartCreatedInstance(mockWebView);
+        mockWebViewInstanceId = instanceManager.tryAddInstance(mockWebView)!;
       });
 
       test('onPageStarted', () {
@@ -679,10 +591,6 @@ void main() {
           'https://www.google.com',
         ));
       });
-
-      test('copy', () {
-        expect(WebViewClient.detached().copy(), isA<WebViewClient>());
-      });
     });
 
     group('DownloadListener', () {
@@ -694,15 +602,14 @@ void main() {
       late int mockDownloadListenerInstanceId;
 
       setUp(() {
-        instanceManager = InstanceManager(onWeakReferenceRemoved: (_) {});
+        instanceManager = InstanceManager();
         flutterApi = DownloadListenerFlutterApiImpl(
           instanceManager: instanceManager,
         );
 
         mockDownloadListener = MockDownloadListener();
-        when(mockDownloadListener.copy()).thenReturn(MockDownloadListener());
         mockDownloadListenerInstanceId =
-            instanceManager.addDartCreatedInstance(mockDownloadListener);
+            instanceManager.tryAddInstance(mockDownloadListener)!;
       });
 
       test('onPageStarted', () {
@@ -722,10 +629,6 @@ void main() {
           45,
         ));
       });
-
-      test('copy', () {
-        expect(DownloadListener.detached().copy(), isA<DownloadListener>());
-      });
     });
 
     group('WebChromeClient', () {
@@ -740,21 +643,17 @@ void main() {
       late int mockWebViewInstanceId;
 
       setUp(() {
-        instanceManager = InstanceManager(onWeakReferenceRemoved: (_) {});
+        instanceManager = InstanceManager();
         flutterApi = WebChromeClientFlutterApiImpl(
           instanceManager: instanceManager,
         );
 
         mockWebChromeClient = MockWebChromeClient();
-        when(mockWebChromeClient.copy()).thenReturn(MockWebChromeClient());
-
         mockWebChromeClientInstanceId =
-            instanceManager.addDartCreatedInstance(mockWebChromeClient);
+            instanceManager.tryAddInstance(mockWebChromeClient)!;
 
         mockWebView = MockWebView();
-        when(mockWebView.copy()).thenReturn(MockWebView());
-        mockWebViewInstanceId =
-            instanceManager.addDartCreatedInstance(mockWebView);
+        mockWebViewInstanceId = instanceManager.tryAddInstance(mockWebView)!;
       });
 
       test('onPageStarted', () {
@@ -764,10 +663,6 @@ void main() {
           76,
         );
         verify(mockWebChromeClient.onProgressChanged(mockWebView, 76));
-      });
-
-      test('copy', () {
-        expect(WebChromeClient.detached().copy(), isA<WebChromeClient>());
       });
     });
   });
@@ -800,7 +695,7 @@ void main() {
 
       webStorage = WebStorage();
       webStorageInstanceId =
-          WebStorage.api.instanceManager.getIdentifier(webStorage)!;
+          WebStorage.api.instanceManager.getInstanceId(webStorage)!;
     });
 
     test('create', () {
@@ -810,10 +705,6 @@ void main() {
     test('deleteAllData', () {
       webStorage.deleteAllData();
       verify(mockPlatformHostApi.deleteAllData(webStorageInstanceId));
-    });
-
-    test('copy', () {
-      expect(WebStorage.detached().copy(), isA<WebStorage>());
     });
   });
 }

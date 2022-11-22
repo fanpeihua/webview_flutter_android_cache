@@ -21,6 +21,7 @@ import io.flutter.plugins.webviewflutter.WebChromeClientHostApiImpl.WebChromeCli
 import io.flutter.plugins.webviewflutter.WebViewClientHostApiImpl.ReleasableWebViewClient;
 import java.util.HashMap;
 import java.util.Map;
+
 import java.util.Objects;
 import android.net.Uri;
 import android.content.Intent;
@@ -343,7 +344,7 @@ public class WebViewHostApiImpl implements WebViewHostApi {
             : webViewProxy.createInputAwareWebView(context, containerView);
 
     displayListenerProxy.onPostWebViewInitialization(displayManager);
-    instanceManager.addDartCreatedInstance(webView, instanceId);
+    instanceManager.addInstance(webView, instanceId);
   }
 
   @Override
@@ -351,7 +352,7 @@ public class WebViewHostApiImpl implements WebViewHostApi {
     final WebView instance = (WebView) instanceManager.getInstance(instanceId);
     if (instance != null) {
       ((Releasable) instance).release();
-      instanceManager.remove(instanceId);
+      instanceManager.removeInstance(instance);
     }
   }
 
@@ -464,16 +465,6 @@ public class WebViewHostApiImpl implements WebViewHostApi {
     return (long) webView.getScrollY();
   }
 
-  @NonNull
-  @Override
-  public GeneratedAndroidWebView.WebViewPoint getScrollPosition(@NonNull Long instanceId) {
-    final WebView webView = Objects.requireNonNull(instanceManager.getInstance(instanceId));
-    return new GeneratedAndroidWebView.WebViewPoint.Builder()
-        .setX((long) webView.getScrollX())
-        .setY((long) webView.getScrollY())
-        .build();
-  }
-
   @Override
   public void setWebContentsDebuggingEnabled(Boolean enabled) {
     webViewProxy.setWebContentsDebuggingEnabled(enabled);
@@ -511,7 +502,9 @@ public class WebViewHostApiImpl implements WebViewHostApi {
   public void setWebChromeClient(Long instanceId, Long clientInstanceId) {
     final WebView webView = (WebView) instanceManager.getInstance(instanceId);
 //    webView.setWebChromeClient((WebChromeClient) instanceManager.getInstance(clientInstanceId));
-//
+
+
+
     Context context1 = context;
     webView.setWebChromeClient(new WebChromeClient(){
       @Override
@@ -529,18 +522,11 @@ public class WebViewHostApiImpl implements WebViewHostApi {
       }
 
     });
-
-
   }
 
   @Override
   public void setBackgroundColor(Long instanceId, Long color) {
     final WebView webView = (WebView) instanceManager.getInstance(instanceId);
     webView.setBackgroundColor(color.intValue());
-  }
-
-  /** Maintains instances used to communicate with the corresponding WebView Dart object. */
-  public InstanceManager getInstanceManager() {
-    return instanceManager;
   }
 }

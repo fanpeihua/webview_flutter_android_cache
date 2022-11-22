@@ -1,18 +1,18 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
-MERGED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
-MERGED from [:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-13:12
-MERGED from [:integration_test] E:\AndroidMine\webview_flutter_android\example\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:7:1-12:12
-MERGED from [:espresso] E:\AndroidMine\webview_flutter_android\example\build\espresso\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:path_provider_android] E:\AndroidMine\webview_flutter_android\example\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
+INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
+INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
+INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
+MERGED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
+MERGED from [:webview_flutter_android] E:\project\webview-android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-13:12
+MERGED from [:integration_test] E:\project\webview-android\example\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:7:1-12:12
+MERGED from [:espresso] E:\project\webview-android\example\build\espresso\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider_android] E:\project\webview-android\example\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.test.ext:junit:1.1.3] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\2c5edcb204d59bdc4dd8596da4eddf73\jetified-junit-1.1.3\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.test.ext:truth:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\9385c8004433d471f3b3950aef3e77ad\jetified-truth-1.4.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:17:1-53:12
-MERGED from [androidx.webkit:webkit:1.5.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\f64f25cdeacaabce5e2651ffdfd0da18\webkit-1.5.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.webkit:webkit:1.0.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\ed3d09718a05cafc393e24cbbfb0bc1a\webkit-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.test.espresso:espresso-intents:3.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\616fc8031a9400d258c8ce30f86bd329\espresso-intents-3.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.test:rules:1.2.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\1c95094c267e3a530c443681b0bb2bc0\rules-1.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.test.espresso:espresso-contrib:3.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\04109b6eb6a85ffa16f723dffba8efde\espresso-contrib-3.1.0\AndroidManifest.xml:17:1-26:12
@@ -59,29 +59,29 @@ MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\29466\.gradle\
 MERGED from [androidx.test.espresso.idling:idling-concurrent:3.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\aa18ec3b1d98bcabcd3b7ce44cac6d6e\idling-concurrent-3.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\a6b5f6271d5ac7608df7fb76f2498d7e\espresso-idling-resource-3.2.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\9918e38a77c821c580bba125cd1e54de\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:1:1-25:12
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:1:1-25:12
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:1:1-25:12
+INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:1:1-25:12
+INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:1:1-25:12
+INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:1:1-25:12
 	package
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:2:3-53
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:2:3-53
+		INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml
 	android:versionName
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
+		INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml
 	android:versionCode
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:1:1-42:12
+		INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:1:11-69
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:1:11-69
 application
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:4:3-30:17
-MERGED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:4:3-30:17
-MERGED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:4:3-30:17
-MERGED from [:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-11:19
-MERGED from [:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-11:19
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:4:3-30:17
+MERGED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:4:3-30:17
+MERGED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:4:3-30:17
+MERGED from [:webview_flutter_android] E:\project\webview-android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-11:19
+MERGED from [:webview_flutter_android] E:\project\webview-android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-11:19
 MERGED from [androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:26:5-51:19
 MERGED from [androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:26:5-51:19
 MERGED from [androidx.test.espresso:espresso-contrib:3.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\04109b6eb6a85ffa16f723dffba8efde\espresso-contrib-3.1.0\AndroidManifest.xml:24:5-20
@@ -99,79 +99,79 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\29
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.6.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e46cc16f2cf85a4504f63547e52be0e6\core-1.6.0\AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:7:5-44
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:7:5-44
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:7:5-44
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:7:5-44
 	android:icon
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:6:5-39
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:6:5-39
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:6:5-39
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:6:5-39
 	android:usesCleartextTraffic
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:5:5-40
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:5:5-40
 meta-data#flutterEmbedding
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:8:5-10:29
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:8:5-10:29
 	android:value
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:10:9-26
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:10:9-26
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:9:9-40
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:9:9-40
 activity#io.flutter.embedding.android.FlutterActivity
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:11:5-29:16
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:11:5-29:16
 	android:launchMode
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:14:7-37
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:14:7-37
 	android:hardwareAccelerated
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:13:7-41
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:13:7-41
 	android:windowSoftInputMode
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:17:7-49
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:17:7-49
 	android:configChanges
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:12:7-138
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:12:7-138
 	android:theme
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:16:7-41
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:16:7-41
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:15:7-66
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:15:7-66
 meta-data#io.flutter.app.android.SplashScreenUntilFirstFrame
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:22:7-24:31
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:22:7-24:31
 	android:value
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:24:9-29
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:24:9-29
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:23:9-74
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:23:9-74
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:25:7-28:23
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:25:7-28:23
 action#android.intent.action.MAIN
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:9-60
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:26:9-60
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:26:17-58
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:26:17-58
 category#android.intent.category.LAUNCHER
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:27:9-68
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:27:9-68
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:27:19-66
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:27:19-66
 uses-permission#android.permission.INTERNET
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:36:3-64
-MERGED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:36:3-64
-MERGED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:36:3-64
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:36:3-64
+MERGED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:36:3-64
+MERGED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:36:3-64
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:36:20-62
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:36:20-62
 uses-permission#android.permission.WAKE_LOCK
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:41:3-66
+ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:41:3-66
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml:41:20-63
+		ADDED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml:41:20-63
 uses-sdk
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml
-MERGED from [:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:integration_test] E:\AndroidMine\webview_flutter_android\example\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-44
-MERGED from [:integration_test] E:\AndroidMine\webview_flutter_android\example\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-44
-MERGED from [:espresso] E:\AndroidMine\webview_flutter_android\example\build\espresso\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:espresso] E:\AndroidMine\webview_flutter_android\example\build\espresso\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:path_provider_android] E:\AndroidMine\webview_flutter_android\example\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:path_provider_android] E:\AndroidMine\webview_flutter_android\example\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml
+INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml
+MERGED from [:webview_flutter_android] E:\project\webview-android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:webview_flutter_android] E:\project\webview-android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:integration_test] E:\project\webview-android\example\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-44
+MERGED from [:integration_test] E:\project\webview-android\example\build\integration_test\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-44
+MERGED from [:espresso] E:\project\webview-android\example\build\espresso\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:espresso] E:\project\webview-android\example\build\espresso\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] E:\project\webview-android\example\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:path_provider_android] E:\project\webview-android\example\build\path_provider_android\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.test.ext:junit:1.1.3] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\2c5edcb204d59bdc4dd8596da4eddf73\jetified-junit-1.1.3\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.test.ext:junit:1.1.3] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\2c5edcb204d59bdc4dd8596da4eddf73\jetified-junit-1.1.3\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.test.ext:truth:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\9385c8004433d471f3b3950aef3e77ad\jetified-truth-1.4.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.test.ext:truth:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\9385c8004433d471f3b3950aef3e77ad\jetified-truth-1.4.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.webkit:webkit:1.5.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\f64f25cdeacaabce5e2651ffdfd0da18\webkit-1.5.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.webkit:webkit:1.5.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\f64f25cdeacaabce5e2651ffdfd0da18\webkit-1.5.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.0.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\ed3d09718a05cafc393e24cbbfb0bc1a\webkit-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.webkit:webkit:1.0.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\ed3d09718a05cafc393e24cbbfb0bc1a\webkit-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.test.espresso:espresso-intents:3.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\616fc8031a9400d258c8ce30f86bd329\espresso-intents-3.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.test.espresso:espresso-intents:3.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\616fc8031a9400d258c8ce30f86bd329\espresso-intents-3.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.test:rules:1.2.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\1c95094c267e3a530c443681b0bb2bc0\rules-1.2.0\AndroidManifest.xml:20:5-22:41
@@ -264,48 +264,48 @@ MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] C:\Users\294
 MERGED from [androidx.test.espresso:espresso-idling-resource:3.2.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\a6b5f6271d5ac7608df7fb76f2498d7e\espresso-idling-resource-3.2.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\9918e38a77c821c580bba125cd1e54de\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\9918e38a77c821c580bba125cd1e54de\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml
-INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml
+INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml
+INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\main\AndroidManifest.xml
-		INJECTED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\example\android\app\src\main\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml
 activity#io.flutter.plugins.webviewflutterexample.WebViewTestActivity
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:8:9-15:20
+ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:8:9-15:20
 	android:launchMode
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:10:13-43
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:10:13-43
 	android:hardwareAccelerated
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:13:13-47
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:13:13-47
 	android:windowSoftInputMode
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:14:13-55
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:14:13-55
 	android:configChanges
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:12:13-163
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:12:13-163
 	android:theme
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:11:13-47
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:11:13-47
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:9:13-48
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:9:13-48
 activity#io.flutter.plugins.webviewflutterexample.DriverExtensionActivity
-ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:16:9-23:20
+ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:16:9-23:20
 	android:launchMode
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:18:17-47
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:18:17-47
 	android:hardwareAccelerated
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:21:17-51
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:21:17-51
 	android:windowSoftInputMode
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:22:17-59
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:22:17-59
 	android:configChanges
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:20:17-167
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:20:17-167
 	android:theme
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:19:17-51
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:19:17-51
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\example\android\app\src\debug\AndroidManifest.xml:17:17-56
+		ADDED from E:\project\webview-android\example\android\app\src\debug\AndroidManifest.xml:17:17-56
 activity#io.flutter.plugins.webviewflutter.newActivity
-ADDED from [:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-10:75
+ADDED from [:webview_flutter_android] E:\project\webview-android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-10:75
 	android:theme
-		ADDED from [:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-72
+		ADDED from [:webview_flutter_android] E:\project\webview-android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:10:13-72
 	android:name
-		ADDED from [:webview_flutter_android] E:\AndroidMine\webview_flutter_android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-73
+		ADDED from [:webview_flutter_android] E:\project\webview-android\example\build\webview_flutter_android\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-73
 uses-permission#android.permission.REORDER_TASKS
 ADDED from [androidx.test:core:1.4.0] C:\Users\29466\.gradle\caches\transforms-2\files-2.1\e04a7b7622e127e4f5ea548df1dd8ccb\jetified-core-1.4.0\AndroidManifest.xml:24:5-72
 	android:name

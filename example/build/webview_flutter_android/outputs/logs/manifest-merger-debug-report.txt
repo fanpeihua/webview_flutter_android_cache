@@ -1,27 +1,27 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:1:1-10:12
-INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:1:1-10:12
-INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:1:1-10:12
+ADDED from E:\project\webview-android\android\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml:1:1-10:12
+INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml:1:1-10:12
 	package
-		ADDED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:1:11-54
-		INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml
-		INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml
+		ADDED from E:\project\webview-android\android\src\main\AndroidManifest.xml:1:11-54
+		INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:2:5-63
+		ADDED from E:\project\webview-android\android\src\main\AndroidManifest.xml:2:5-63
 application
-ADDED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:5:5-9:19
+ADDED from E:\project\webview-android\android\src\main\AndroidManifest.xml:5:5-9:19
 activity#io.flutter.plugins.webviewflutter.newActivity
-ADDED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:6:9-8:74
+ADDED from E:\project\webview-android\android\src\main\AndroidManifest.xml:6:9-8:74
 	android:theme
-		ADDED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:8:13-72
+		ADDED from E:\project\webview-android\android\src\main\AndroidManifest.xml:8:13-72
 	android:name
-		ADDED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml:7:13-40
+		ADDED from E:\project\webview-android\android\src\main\AndroidManifest.xml:7:13-40
 uses-sdk
-INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml
-INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml
+INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml
+INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml
-		ADDED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml
-		INJECTED from E:\AndroidMine\webview_flutter_android\android\src\main\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml
+		ADDED from E:\project\webview-android\android\src\main\AndroidManifest.xml
+		INJECTED from E:\project\webview-android\android\src\main\AndroidManifest.xml

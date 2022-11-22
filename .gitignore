@@ -32,7 +32,6 @@ PodfileLocal.yaml
 .pub/
 /build/
 /android/app/bugly/
-example/build
 
 # Android related
 **/android/**/gradle-wrapper.jar
