@@ -90,7 +90,33 @@ public class newActivity extends Activity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                openCamera();
+
+                XXPermissions.with(newActivity.this)
+                        // 申请单个权限
+                        .permission(Permission.CAMERA)
+                        .request(new OnPermissionCallback() {
+
+                            @Override
+                            public void onGranted(List<String> permissions, boolean all) {
+                                if (!all) {
+                                    Toast.makeText(newActivity.this, "获取部分权限成功，但部分权限未正常授予", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                               openCamera();
+                            }
+
+                            @Override
+                            public void onDenied(List<String> permissions, boolean never) {
+                                if (never) {
+                                    Toast.makeText(newActivity.this, "被永久拒绝授权，请手动授予拍照权限", Toast.LENGTH_SHORT).show();
+                                    // 如果是被永久拒绝就跳转到应用权限系统设置页面
+                                    XXPermissions.startPermissionActivity(newActivity.this, permissions);
+                                } else {
+                                    Toast.makeText(newActivity.this, "获取拍照权限失败", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
             }
         });
 
