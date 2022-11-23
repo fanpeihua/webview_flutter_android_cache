@@ -110,7 +110,7 @@ class _WebViewExampleState extends State<_WebViewExample> {
         ],
       ),
       body: WebView(
-        initialUrl: 'https://flutter.dev',
+        initialUrl: 'https://mobile.ant.design/~demos/image-uploader-demo2/',
         onWebViewCreated: (WebViewController controller) {
           _controller.complete(controller);
         },
