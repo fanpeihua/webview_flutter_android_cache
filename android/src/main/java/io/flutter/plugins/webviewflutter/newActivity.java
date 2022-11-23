@@ -1,11 +1,14 @@
 package io.flutter.plugins.webviewflutter;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -15,16 +18,16 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.ValueCallback;
-import android.database.Cursor;
-import android.content.pm.PackageManager;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.widget.Toast;
-import android.Manifest;
-import android.os.Build;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.app.ActivityCompat;
+
+import com.hjq.permissions.OnPermissionCallback;
+import com.hjq.permissions.Permission;
+import com.hjq.permissions.XXPermissions;
+
+import java.util.List;
 
 public class newActivity extends Activity {
     private static ValueCallback<Uri[]> mUploadMessageArray;
@@ -45,7 +48,7 @@ public class newActivity extends Activity {
     }
 
     private void openAblum() {
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);//任意类型文件
+        Intent intent = new Intent(Intent.ACTION_PICK);//任意类型文件
         intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
@@ -95,11 +98,43 @@ public class newActivity extends Activity {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&ContextCompat.checkSelfPermission(newActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(newActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 10086);
-                } else {
-                    openAblum();
-                }
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&ContextCompat.checkSelfPermission(newActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(newActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 10086);
+
+                    XXPermissions.with(newActivity.this)
+                            // 申请单个权限
+                            .permission(Permission.WRITE_EXTERNAL_STORAGE)
+                            // 申请多个权限
+                            .permission(Permission.READ_EXTERNAL_STORAGE)
+                            // 设置权限请求拦截器（局部设置）
+                            //.interceptor(new PermissionInterceptor())
+                            // 设置不触发错误检测机制（局部设置）
+                            //.unchecked()
+                            .request(new OnPermissionCallback() {
+
+                                @Override
+                                public void onGranted(List<String> permissions, boolean all) {
+                                    if (!all) {
+                                        Toast.makeText(newActivity.this, "获取部分权限成功，但部分权限未正常授予", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                    openAblum();
+                                }
+
+                                @Override
+                                public void onDenied(List<String> permissions, boolean never) {
+                                    if (never) {
+                                        Toast.makeText(newActivity.this, "被永久拒绝授权，请手动授予读写权限", Toast.LENGTH_SHORT).show();
+                                        // 如果是被永久拒绝就跳转到应用权限系统设置页面
+                                        XXPermissions.startPermissionActivity(newActivity.this, permissions);
+                                    } else {
+                                        Toast.makeText(newActivity.this, "获取读写权限失败", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+//                } else {
+//                }
+
 
             }
         });
@@ -114,18 +149,18 @@ public class newActivity extends Activity {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 10086) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                openAblum();
-            } else {
-                Toast.makeText(newActivity.this, "读写权限已拒绝，建议打开可查看相册", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        if (requestCode == 10086) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                openAblum();
+//            } else {
+//                Toast.makeText(newActivity.this, "读写权限已拒绝，建议打开可查看相册", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
