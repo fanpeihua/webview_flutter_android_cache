@@ -4,8 +4,12 @@
 
 package io.flutter.plugins.webviewflutter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -105,6 +109,27 @@ public class WebChromeClientHostApiImpl implements WebChromeClientHostApi {
       if (flutterApi != null) {
         flutterApi.onProgressChanged(this, view, (long) progress, reply -> {});
       }
+    }
+
+    @Override
+    public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+      Context context1 = webView.getContext();
+      webView.setWebChromeClient(new WebChromeClient(){
+        @Override
+        public boolean onShowFileChooser(
+                WebView webView, ValueCallback<Uri[]> filePathCallback,
+                FileChooserParams fileChooserParams) {
+
+          //成功跳转newActivity！！！很 nice
+          //跳转到newActivity去打开文件夹的操作
+          Intent intent = new Intent(context1,newActivity.class);
+          newActivity.getfilePathCallback(filePathCallback);
+          intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          context1.startActivity(intent);
+          return true;
+        }
+      });
+      return super.onShowFileChooser(webView, filePathCallback, fileChooserParams);
     }
 
     /**

@@ -156,6 +156,7 @@ public class WebViewHostApiImpl implements WebViewHostApi {
     public void setWebChromeClient(WebChromeClient client) {
       super.setWebChromeClient(client);
       currentWebChromeClient.set((WebChromeClientImpl) client);
+
     }
 
     @SuppressLint("JavascriptInterface")
@@ -501,27 +502,7 @@ public class WebViewHostApiImpl implements WebViewHostApi {
   @Override
   public void setWebChromeClient(Long instanceId, Long clientInstanceId) {
     final WebView webView = (WebView) instanceManager.getInstance(instanceId);
-//    webView.setWebChromeClient((WebChromeClient) instanceManager.getInstance(clientInstanceId));
-
-
-
-    Context context1 = context;
-    webView.setWebChromeClient(new WebChromeClient(){
-      @Override
-      public boolean onShowFileChooser(
-              WebView webView, ValueCallback<Uri[]> filePathCallback,
-              FileChooserParams fileChooserParams) {
-
-        //成功跳转newActivity！！！很 nice
-        //跳转到newActivity去打开文件夹的操作
-        Intent intent = new Intent(context1,newActivity.class);
-        newActivity.getfilePathCallback(filePathCallback);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context1.startActivity(intent);
-        return true;
-      }
-
-    });
+    webView.setWebChromeClient((WebChromeClient) instanceManager.getInstance(clientInstanceId));
   }
 
   @Override
