@@ -7,6 +7,7 @@ package io.flutter.plugins.webviewflutter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.display.DisplayManager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebChromeClient;
@@ -123,6 +124,26 @@ public class WebViewHostApiImpl implements WebViewHostApi {
      */
     public WebViewPlatformView(Context context) {
       super(context);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+      try {
+        return super.onTouchEvent(event);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      return false;
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+      try {
+        return super.onInterceptTouchEvent(ev);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      return false;
     }
 
     @Override

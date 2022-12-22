@@ -10,6 +10,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
@@ -47,6 +48,26 @@ class InputAwareWebView extends WebView {
     if (containerView != null) {
       setInputConnectionTarget(proxyAdapterView);
     }
+  }
+
+  @Override
+  public boolean onTouchEvent(MotionEvent event) {
+    try {
+      return super.onTouchEvent(event);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return false;
+  }
+
+  @Override
+  public boolean onInterceptTouchEvent(MotionEvent ev) {
+    try {
+      return super.onInterceptTouchEvent(ev);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return false;
   }
 
   /**
@@ -179,7 +200,12 @@ class InputAwareWebView extends WebView {
             }
 
             InputMethodManager imm =
-                (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
+                    null;
+            try {
+              imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
             // This is a hack to make InputMethodManager believe that the target view now has focus.
             // As a result, InputMethodManager will think that targetView is focused, and will call
             // getHandler() of the view when creating input connection.
@@ -192,7 +218,11 @@ class InputAwareWebView extends WebView {
             // onCreateInputConnection() on targetView on the same thread as
             // targetView.getHandler(). It will also call subsequent InputConnection methods on this
             // thread. This is the IME thread in cases where targetView is our proxyAdapterView.
-            imm.isActive(containerView);
+            try {
+              imm.isActive(containerView);
+            } catch (java.lang.Exception e) {
+              e.printStackTrace();
+            }
           }
         });
   }
