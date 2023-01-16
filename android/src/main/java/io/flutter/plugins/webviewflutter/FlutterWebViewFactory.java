@@ -5,6 +5,10 @@
 package io.flutter.plugins.webviewflutter;
 
 import android.content.Context;
+import android.os.Build;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+
 import io.flutter.plugin.common.StandardMessageCodec;
 import io.flutter.plugin.platform.PlatformView;
 import io.flutter.plugin.platform.PlatformViewFactory;
@@ -20,6 +24,16 @@ class FlutterWebViewFactory extends PlatformViewFactory {
   @Override
   public PlatformView create(Context context, int id, Object args) {
     final PlatformView view = (PlatformView) instanceManager.getInstance((Integer) args);
+    try {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (view instanceof WebView){
+          ((WebView)view).getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     if (view == null) {
       throw new IllegalStateException("Unable to find WebView instance: " + args);
     }
