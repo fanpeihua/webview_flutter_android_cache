@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -35,6 +36,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class newActivity extends Activity {
     private static ValueCallback<Uri[]> mUploadMessageArray;
@@ -270,33 +275,64 @@ public class newActivity extends Activity {
                 break;
             case 2:
                 if (data != null) {
-                    Uri uri = data.getData();
+                    final Uri[] uri = {data.getData()};
 
-                    if (uri == null) {
-                        //好像时部分机型会出现的问题，我的mix3就遇到了。
-                        //拍照返回的时候uri为空，但是data里有inline-data。
+                    if (uri[0] == null) {
                         Log.i("TAG", String.valueOf(data));
                         Bundle bundle = data.getExtras();
+                        String path = getCacheDir().getAbsolutePath();
+
                         try {
-                            FileInputStream is = null;
+                            final FileInputStream[] is = {null};
                             try {
-                                // 获取输入流
-                                is = new FileInputStream(mFilePath);
-                                // 把流解析成bitmap,此时就得到了清晰的原图
-                                Bitmap bitmap = BitmapFactory.decodeStream(is);
-                                //接下来就可以展示了（或者做上传处理）
-                                uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
-                                Uri[] results = new Uri[]{uri};
-                                mUploadMessageArray.onReceiveValue(results);
-                            } catch (FileNotFoundException e) {
+                                Luban.with(this)
+                                        .load(mFilePath)
+                                        .ignoreBy(400)
+                                        .setTargetDir(path)
+                                        .filter(new CompressionPredicate() {
+                                            @Override
+                                            public boolean apply(String path) {
+                                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                                            }
+                                        })
+                                        .setCompressListener(new OnCompressListener() {
+                                            @Override
+                                            public void onStart() {
+                                            }
+
+                                            @Override
+                                            public void onSuccess(File file) {
+                                                // 获取输入流
+                                                try {
+                                                    is[0] = new FileInputStream(file.getPath());
+                                                    // 把流解析成bitmap,此时就得到了清晰的原图
+                                                    Bitmap bitmap = BitmapFactory.decodeStream(is[0]);
+                                                    //接下来就可以展示了（或者做上传处理）
+                                                    uri[0] = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
+                                                    Uri[] results = new Uri[]{uri[0]};
+                                                    mUploadMessageArray.onReceiveValue(results);
+                                                } catch (FileNotFoundException e) {
+                                                    e.printStackTrace();
+                                                } finally {
+                                                    // 关闭流
+                                                    try {
+                                                        is[0].close();
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onError(Throwable e) {
+                                                Log.d("uploadPic", e.toString());
+                                            }
+                                        }).launch();
+
+
+
+                            } catch (Exception e) {
                                 e.printStackTrace();
-                            } finally {
-                                // 关闭流
-                                try {
-                                    is.close();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
                             }
 
                         } catch (Exception e) {
@@ -304,7 +340,7 @@ public class newActivity extends Activity {
                             mUploadMessageArray.onReceiveValue(null);
                         }
                     } else {
-                        Uri[] results = new Uri[]{uri};
+                        Uri[] results = new Uri[]{uri[0]};
                         mUploadMessageArray.onReceiveValue(results);
                     }
 
