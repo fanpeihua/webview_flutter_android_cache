@@ -287,7 +287,7 @@ public class newActivity extends Activity {
                             try {
                                 Luban.with(this)
                                         .load(mFilePath)
-                                        .ignoreBy(400)
+                                        .ignoreBy(500)
                                         .setTargetDir(path)
                                         .filter(new CompressionPredicate() {
                                             @Override
