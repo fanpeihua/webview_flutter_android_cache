@@ -77,9 +77,9 @@ public class newActivity extends Activity {
         // 保存图片的文件名
         mFilePath = mFilePath + "/" + "mytest.png";
 
-        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             takePhotoBiggerThan7((new File(mFilePath)).getAbsolutePath());
-        }else {
+        } else {
             // 指定拍照意图
             Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             // 加载路径图片路径
@@ -151,7 +151,7 @@ public class newActivity extends Activity {
                                     Toast.makeText(newActivity.this, "获取部分权限成功，但部分权限未正常授予", Toast.LENGTH_SHORT).show();
                                     return;
                                 }
-                               openCamera();
+                                openCamera();
                             }
 
                             @Override
@@ -176,37 +176,37 @@ public class newActivity extends Activity {
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&ContextCompat.checkSelfPermission(newActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
 //                    ActivityCompat.requestPermissions(newActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, 10086);
 
-                    XXPermissions.with(newActivity.this)
-                            // 申请单个权限
-                            .permission(Permission.WRITE_EXTERNAL_STORAGE)
-                            // 申请多个权限
-                            .permission(Permission.READ_EXTERNAL_STORAGE)
-                            // 设置权限请求拦截器（局部设置）
-                            //.interceptor(new PermissionInterceptor())
-                            // 设置不触发错误检测机制（局部设置）
-                            //.unchecked()
-                            .request(new OnPermissionCallback() {
+                XXPermissions.with(newActivity.this)
+                        // 申请单个权限
+                        .permission(Permission.WRITE_EXTERNAL_STORAGE)
+                        // 申请多个权限
+                        .permission(Permission.READ_EXTERNAL_STORAGE)
+                        // 设置权限请求拦截器（局部设置）
+                        //.interceptor(new PermissionInterceptor())
+                        // 设置不触发错误检测机制（局部设置）
+                        //.unchecked()
+                        .request(new OnPermissionCallback() {
 
-                                @Override
-                                public void onGranted(List<String> permissions, boolean all) {
-                                    if (!all) {
-                                        Toast.makeText(newActivity.this, "获取部分权限成功，但部分权限未正常授予", Toast.LENGTH_SHORT).show();
-                                        return;
-                                    }
-                                    openAblum();
+                            @Override
+                            public void onGranted(List<String> permissions, boolean all) {
+                                if (!all) {
+                                    Toast.makeText(newActivity.this, "获取部分权限成功，但部分权限未正常授予", Toast.LENGTH_SHORT).show();
+                                    return;
                                 }
+                                openAblum();
+                            }
 
-                                @Override
-                                public void onDenied(List<String> permissions, boolean never) {
-                                    if (never) {
-                                        Toast.makeText(newActivity.this, "被永久拒绝授权，请手动授予读写权限", Toast.LENGTH_SHORT).show();
-                                        // 如果是被永久拒绝就跳转到应用权限系统设置页面
-                                        XXPermissions.startPermissionActivity(newActivity.this, permissions);
-                                    } else {
-                                        Toast.makeText(newActivity.this, "获取读写权限失败", Toast.LENGTH_SHORT).show();
-                                    }
+                            @Override
+                            public void onDenied(List<String> permissions, boolean never) {
+                                if (never) {
+                                    Toast.makeText(newActivity.this, "被永久拒绝授权，请手动授予读写权限", Toast.LENGTH_SHORT).show();
+                                    // 如果是被永久拒绝就跳转到应用权限系统设置页面
+                                    XXPermissions.startPermissionActivity(newActivity.this, permissions);
+                                } else {
+                                    Toast.makeText(newActivity.this, "获取读写权限失败", Toast.LENGTH_SHORT).show();
                                 }
-                            });
+                            }
+                        });
 //                } else {
 //                }
 
@@ -242,7 +242,7 @@ public class newActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         //防止退出时，data没有数据，导致闪退。
         Log.i("TAG", "forResult");
-        switch(requestCode){
+        switch (requestCode) {
             case 1:
                 if (data != null) {
                     Uri uri = data.getData();
@@ -275,7 +275,7 @@ public class newActivity extends Activity {
                 break;
             case 2:
                 if (data != null) {
-                     Uri[] uri = {data.getData()};
+                    final Uri[] uri = {data.getData()};
 
                     if (uri[0] == null) {
                         Log.i("TAG", String.valueOf(data));
@@ -283,7 +283,7 @@ public class newActivity extends Activity {
                         String path = getCacheDir().getAbsolutePath();
 
                         try {
-                            FileInputStream[] is = {null};
+                            final FileInputStream[] is = {null};
                             try {
                                 Luban.with(this)
                                         .load(mFilePath)
@@ -303,24 +303,8 @@ public class newActivity extends Activity {
                                             @Override
                                             public void onSuccess(File file) {
                                                 // 获取输入流
-                                                try {
-                                                    is[0] = new FileInputStream(file.getPath());
-                                                    // 把流解析成bitmap,此时就得到了清晰的原图
-                                                    Bitmap bitmap = BitmapFactory.decodeStream(is[0]);
-                                                    //接下来就可以展示了（或者做上传处理）
-                                                    uri[0] = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
-                                                    Uri[] results = new Uri[]{uri[0]};
-                                                    mUploadMessageArray.onReceiveValue(results);
-                                                } catch (FileNotFoundException e) {
-                                                    e.printStackTrace();
-                                                } finally {
-                                                    // 关闭流
-                                                    try {
-                                                        is[0].close();
-                                                    } catch (IOException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
+                                                Uri[] results = new Uri[]{Uri.fromFile(file)};
+                                                mUploadMessageArray.onReceiveValue(results);
                                             }
 
                                             @Override
@@ -328,7 +312,6 @@ public class newActivity extends Activity {
                                                 Log.d("uploadPic", e.toString());
                                             }
                                         }).launch();
-
 
 
                             } catch (Exception e) {
