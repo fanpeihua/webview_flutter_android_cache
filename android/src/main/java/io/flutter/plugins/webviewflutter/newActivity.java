@@ -75,7 +75,7 @@ public class newActivity extends Activity {
     private void openCamera() {
         mFilePath = Environment.getExternalStorageDirectory().getPath();
         // 保存图片的文件名
-        mFilePath = mFilePath + "/" + "mytest"+System.currentTimeMillis() + ".jpg";
+        mFilePath = mFilePath + "/" + "mytest"+System.currentTimeMillis() + ".png";
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
