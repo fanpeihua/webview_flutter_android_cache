@@ -3,12 +3,10 @@ package io.flutter.plugins.webviewflutter;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,9 +30,6 @@ import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.List;
 
 import top.zibin.luban.CompressionPredicate;
@@ -44,7 +39,8 @@ import top.zibin.luban.OnCompressListener;
 public class newActivity extends Activity {
     private static ValueCallback<Uri[]> mUploadMessageArray;
 
-    private String mFilePath;
+    private String camera_path = Environment.getExternalStorageDirectory().toString() + "/Photo_YH/";//照片保存位置
+    private String camera_photo_name;// 保存的名称
 
     public static void getfilePathCallback(ValueCallback<Uri[]> filePathCallback) {
         mUploadMessageArray = filePathCallback;
@@ -57,7 +53,6 @@ public class newActivity extends Activity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-
         showBottomDialog();
 
     }
@@ -69,48 +64,23 @@ public class newActivity extends Activity {
         intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
 //        intent.setType("*/*");
 //        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(intent, 10);
+        startActivityForResult(intent, 1);
     }
 
     private void openCamera() {
-        mFilePath = Environment.getExternalStorageDirectory().getPath();
-        // 保存图片的文件名
-        mFilePath = mFilePath + "/" + "mytest" + System.currentTimeMillis() + ".png";
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            takePhotoBiggerThan7((new File(mFilePath)).getAbsolutePath());
-        } else {
-            // 指定拍照意图
-            Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            // 加载路径图片路径
-            Uri mUri = Uri.fromFile(new File(mFilePath));
-            // 指定存储路径，这样就可以保存原图了
-            openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
-            startActivityForResult(openCameraIntent, 20);
+        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); //系统常量， 启动相机的关键
+        File path = new File(camera_path);
+        if (!path.exists()) {
+            path.mkdirs();
         }
-    }
 
-    private void takePhotoBiggerThan7(String absolutePath) {
-        Uri mCameraTempUri;
-        try {
-            ContentValues values = new ContentValues(1);
-            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg");
-            values.put(MediaStore.Images.Media.DATA, absolutePath);
-            mCameraTempUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            if (mCameraTempUri != null) {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraTempUri);
-                intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-            }
-            startActivityForResult(intent, 20);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+        camera_photo_name = System.currentTimeMillis() + ".jpg";
+        File file = new File(path, camera_photo_name);
+        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
 
+        startActivityForResult(openCameraIntent, 2); // 参数常量为自定义的request code, 在取返回结果时有用
+    }
 
     private void showBottomDialog() {
         //1、使用Dialog、设置style
@@ -243,62 +213,58 @@ public class newActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         //防止退出时，data没有数据，导致闪退。
         Log.i("TAG", "forResult");
-        if (data != null) {
-            Log.i("TAG", "? 走到");
-            Uri[] uri = {data.getData()};
+        if (requestCode == 2) {
+            String mFilePath = camera_path + "/" + camera_photo_name;
+            String path = getCacheDir().getAbsolutePath();
 
-            if (uri[0] == null) {
-                Log.i("TAG", String.valueOf(data));
-                Bundle bundle = data.getExtras();
-                String path = getCacheDir().getAbsolutePath();
+            Luban.with(this)
+                    .load(mFilePath)
+                    .ignoreBy(600)
+                    .setTargetDir(path)
+                    .filter(new CompressionPredicate() {
+                        @Override
+                        public boolean apply(String path) {
+                            return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                        }
+                    })
+                    .setCompressListener(new OnCompressListener() {
+                        @Override
+                        public void onStart() {
+                        }
 
-                try {
-                    try {
-                        Luban.with(this)
-                                .load(mFilePath)
-                                .ignoreBy(600)
-                                .setTargetDir(path)
-                                .filter(new CompressionPredicate() {
-                                    @Override
-                                    public boolean apply(String path) {
-                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                                    }
-                                })
-                                .setCompressListener(new OnCompressListener() {
-                                    @Override
-                                    public void onStart() {
-                                    }
+                        @Override
+                        public void onSuccess(File file) {
+                            // 获取输入流
+                            Uri[] results = new Uri[]{Uri.fromFile(file)};
+                            mUploadMessageArray.onReceiveValue(results);
+                        }
 
-                                    @Override
-                                    public void onSuccess(File file) {
-                                        // 获取输入流
-                                        Uri[] results = new Uri[]{Uri.fromFile(file)};
-                                        mUploadMessageArray.onReceiveValue(results);
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        Log.d("uploadPic", e.toString());
-                                    }
-                                }).launch();
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                } catch (Exception e) {
-                    //当不拍照返回相机时，获取到uri也没数据。
-                    mUploadMessageArray.onReceiveValue(null);
-                }
-            } else {
-                Uri[] results = new Uri[]{uri[0]};
-                mUploadMessageArray.onReceiveValue(results);
-            }
-
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.i("TAG", e.toString());
+                        }
+                    }).launch();
         } else {
-            Log.i("TAG", "onReceveValue");
-            mUploadMessageArray.onReceiveValue(null);
+            if (data != null) {
+                Uri uri = data.getData();
+                Log.i("TAG", "! " + data.getClass() + " * " + data);
+                Log.i("TAG", "URi " + uri);
+
+                if (uri == null) {
+                    //好像时部分机型会出现的问题，我的mix3就遇到了。
+                    //拍照返回的时候uri为空，但是data里有inline-data。
+                    Log.i("TAG", String.valueOf(data));
+
+                } else {
+
+                    Uri[] results = new Uri[]{uri};
+                    mUploadMessageArray.onReceiveValue(results);
+                }
+
+            } else {
+                Log.i("TAG", "onReceveValue");
+                mUploadMessageArray.onReceiveValue(null);
+            }
         }
 
 
