@@ -275,7 +275,7 @@ public class newActivity extends Activity {
                 break;
             case 2:
                 if (data != null) {
-                    final Uri[] uri = {data.getData()};
+                     Uri[] uri = {data.getData()};
 
                     if (uri[0] == null) {
                         Log.i("TAG", String.valueOf(data));
@@ -283,7 +283,7 @@ public class newActivity extends Activity {
                         String path = getCacheDir().getAbsolutePath();
 
                         try {
-                            final FileInputStream[] is = {null};
+                            FileInputStream[] is = {null};
                             try {
                                 Luban.with(this)
                                         .load(mFilePath)
