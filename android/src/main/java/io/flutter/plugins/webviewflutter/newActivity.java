@@ -57,7 +57,9 @@ public class newActivity extends Activity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-
+        mFilePath = Environment.getExternalStorageDirectory().getPath();
+        // 保存图片的文件名
+        mFilePath = mFilePath + "/" + "mytest"+System.currentTimeMillis() + ".png";
 
         showBottomDialog();
 
@@ -74,9 +76,7 @@ public class newActivity extends Activity {
     }
 
     private void openCamera() {
-        mFilePath = Environment.getExternalStorageDirectory().getPath();
-        // 保存图片的文件名
-        mFilePath = mFilePath + "/" + "mytest.png";
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             takePhotoBiggerThan7((new File(mFilePath)).getAbsolutePath());
