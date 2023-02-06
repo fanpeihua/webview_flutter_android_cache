@@ -57,6 +57,8 @@ public class newActivity extends Activity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+
+
         showBottomDialog();
 
     }
@@ -72,7 +74,6 @@ public class newActivity extends Activity {
     }
 
     private void openCamera() {
-
         mFilePath = Environment.getExternalStorageDirectory().getPath();
         // 保存图片的文件名
         mFilePath = mFilePath + "/" + "mytest.png";
@@ -275,7 +276,7 @@ public class newActivity extends Activity {
                 break;
             case 2:
                 if (data != null) {
-                    final Uri[] uri = {data.getData()};
+                     Uri[] uri = {data.getData()};
 
                     if (uri[0] == null) {
                         Log.i("TAG", String.valueOf(data));
@@ -283,7 +284,7 @@ public class newActivity extends Activity {
                         String path = getCacheDir().getAbsolutePath();
 
                         try {
-                            final FileInputStream[] is = {null};
+                             FileInputStream[] is = {null};
                             try {
                                 Luban.with(this)
                                         .load(mFilePath)
