@@ -1,20 +1,12 @@
 package io.flutter.plugins.webviewflutter;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,32 +16,17 @@ import android.webkit.ValueCallback;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
-import com.luck.picture.lib.basic.PictureSelector;
+import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.picture.lib.config.PictureSelectionConfig;
-import com.luck.picture.lib.config.SelectMimeType;
-import com.luck.picture.lib.engine.CompressFileEngine;
-import com.luck.picture.lib.engine.UriToFileTransformEngine;
 import com.luck.picture.lib.entity.LocalMedia;
-import com.luck.picture.lib.interfaces.OnKeyValueResultCallbackListener;
-import com.luck.picture.lib.interfaces.OnResultCallbackListener;
-import com.luck.picture.lib.interfaces.OnSelectLimitTipsListener;
-import com.luck.picture.lib.utils.SandboxTransformUtils;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-
-import top.zibin.luban.CompressionPredicate;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
-import top.zibin.luban.OnNewCompressListener;
 
 public class newActivity extends Activity {
     private static ValueCallback<Uri[]> mUploadMessageArray;
@@ -73,81 +50,28 @@ public class newActivity extends Activity {
     }
 
     private void openAblum() {
-        PictureSelector.create(this)
-                .openGallery(SelectMimeType.ofImage())
-                .setImageEngine(GlideEngine.createGlideEngine())
-                .setMaxSelectNum(1)
-                .setCompressEngine(new CompressFileEngine() {
-                    @Override
-                    public void onStartCompress(Context context, ArrayList<Uri> source, OnKeyValueResultCallbackListener call) {
-                        Luban.with(context).load(source).ignoreBy(600)
-                                .setCompressListener(new OnNewCompressListener() {
-                                    @Override
-                                    public void onStart() {
-
-                                    }
-
-                                    @Override
-                                    public void onSuccess(String source, File compressFile) {
-                                        if (call != null) {
-                                            call.onCallback(source, compressFile.getAbsolutePath());
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(String source, Throwable e) {
-                                        if (call != null) {
-                                            call.onCallback(source, null);
-                                        }
-                                    }
-                                }).launch();
-                    }
-                })
-                .setSandboxFileEngine(new UriToFileTransformEngine() {
-                    @Override
-                    public void onUriToFileAsyncTransform(Context context, String srcPath, String mineType, OnKeyValueResultCallbackListener call) {
-                        if (call != null) {
-                            String sandboxPath = SandboxTransformUtils.copyPathToSandbox(context, srcPath, mineType);
-                            call.onCallback(srcPath, sandboxPath);
-                        }
-                    }
-                })
-                .forResult(new OnResultCallbackListener<LocalMedia>() {
-                    @Override
-                    public void onResult(ArrayList<LocalMedia> result) {
-                        if (result != null) {
-                            LocalMedia media = result.get(0);
-                            Uri[] results = new Uri[]{Uri.fromFile(new File(media.getCompressPath()))};
-                            mUploadMessageArray.onReceiveValue(results);
-                        }
-                    }
-
-                    @Override
-                    public void onCancel() {
-
-                    }
-                });
+        PictureSelector.create(newActivity.this)
+                .openGallery(PictureMimeType.ofImage())// 全部.PictureMimeType.ofAll()、图片.ofImage()、视频.ofVideo()、音频.ofAudio()
+                .maxSelectNum(1)// 最大图片选择数量
+                .minSelectNum(1)// 最小选择数量
+                .imageSpanCount(3)// 每行显示个数
+                .selectionMode(PictureConfig.SINGLE)// 多选 or 单选PictureConfig.MULTIPLE : PictureConfig.SINGLE
+                .isPreviewImage(true)// 是否可预览图片
+                .isCamera(false)// 是否显示拍照按钮
+                .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
+                .isEnableCrop(false)// 是否裁剪
+                .isCompress(true)// 是否压缩
+                .glideOverride(160, 160)// glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
+                .rotateEnabled(false) // 裁剪是否可旋转图片
+                .forResult(PictureConfig.CHOOSE_REQUEST);//结果回调onActivityResult code
     }
 
     private void openCamera() {
-        PictureSelector.create(this)
-                .openCamera(SelectMimeType.ofImage())
-                .forResult(new OnResultCallbackListener<LocalMedia>() {
-                    @Override
-                    public void onResult(ArrayList<LocalMedia> result) {
-                        if (result != null) {
-                            LocalMedia media = result.get(0);
-                            Uri[] results = new Uri[]{Uri.fromFile(new File(media.getCompressPath()))};
-                            mUploadMessageArray.onReceiveValue(results);
-                        }
-                    }
-
-                    @Override
-                    public void onCancel() {
-
-                    }
-                });
-
+        PictureSelector.create(newActivity.this)
+                .openCamera(PictureMimeType.ofImage())
+                .isCompress(true)// 是否压缩
+                .isCamera(true)
+                .forResult(PictureConfig.REQUEST_CAMERA);//结果回调onActivityResult code
     }
 
 
@@ -316,4 +240,36 @@ public class newActivity extends Activity {
 //    }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        try {
+            if (resultCode == RESULT_OK) {
+                switch (requestCode) {
+                    case PictureConfig.CHOOSE_REQUEST:
+                        if (data != null) {
+                            List<LocalMedia> localMedia = PictureSelector.obtainMultipleResult(data);
+                            LocalMedia media = localMedia.get(0);
+                            Uri[] results = new Uri[]{Uri.fromFile(new File(media.getCompressPath()))};
+                            mUploadMessageArray.onReceiveValue(results);
+                        }
+                        break;
+                    case PictureConfig.REQUEST_CAMERA:
+                        if (data != null) {
+                            List<LocalMedia> localMedia = PictureSelector.obtainMultipleResult(data);
+                            if (localMedia != null && localMedia.size() > 0) {
+                                LocalMedia media = localMedia.get(0);
+                                Uri[] results = new Uri[]{Uri.fromFile(new File(media.getCompressPath()))};
+                                mUploadMessageArray.onReceiveValue(results);
+                            }
+                        }
+                        break;
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

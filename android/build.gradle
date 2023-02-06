@@ -22,6 +22,24 @@ rootProject.allprojects {
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url 'https://repo1.maven.org/maven2/' }
         maven { url 'https://jitpack.io' }
+
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        maven {
+            credentials {
+                username "61b2ed98ae805dbacc8550b0"
+                password "ChK8nDNCeVpS"
+            }
+            url 'https://packages.aliyun.com/maven/repository/2164527-snapshot-5ZMVRP/'
+        }
+        maven {
+            credentials {
+                username "61b2ed98ae805dbacc8550b0"
+                password "ChK8nDNCeVpS"
+            }
+            url 'https://packages.aliyun.com/maven/repository/2164527-release-lcjzqO/'
+        }
     }
 }
 
@@ -46,9 +64,7 @@ android {
         implementation 'com.github.getActivity:XXPermissions:16.2'
 
         // PictureSelector 基础 (必须)
-        implementation 'io.github.lucksiege:pictureselector:v3.10.7'
-        // 图片压缩 (按需引入)
-        implementation 'io.github.lucksiege:compress:v3.10.7'
+        implementation 'cn.yh.tob.common:lib-picture:1.0.2'
         implementation 'com.github.bumptech.glide:glide:4.12.0'
         annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
