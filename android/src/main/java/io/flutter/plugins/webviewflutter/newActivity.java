@@ -268,6 +268,7 @@ public class newActivity extends Activity {
 
                 }
             }
+            finish();
         } catch (Exception e) {
             e.printStackTrace();
         }
