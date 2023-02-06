@@ -75,7 +75,7 @@ public class newActivity extends Activity {
     private void openCamera() {
         mFilePath = Environment.getExternalStorageDirectory().getPath();
         // 保存图片的文件名
-        mFilePath = mFilePath + "/" + "mytest"+System.currentTimeMillis() + ".png";
+        mFilePath = mFilePath + "/" + "mytest" + System.currentTimeMillis() + ".png";
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -243,97 +243,62 @@ public class newActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         //防止退出时，data没有数据，导致闪退。
         Log.i("TAG", "forResult");
-        switch (requestCode) {
-            case 10:
-                if (data != null) {
-                    Uri uri = data.getData();
-                    Log.i("TAG", "! " + data.getClass() + " * " + data);
-                    Log.i("TAG", "URi " + uri);
+        if (data != null) {
+            Log.i("TAG", "? 走到");
+            Uri[] uri = {data.getData()};
 
-                    if (uri == null) {
-                        //好像时部分机型会出现的问题，我的mix3就遇到了。
-                        //拍照返回的时候uri为空，但是data里有inline-data。
-                        Log.i("TAG", String.valueOf(data));
-                        Bundle bundle = data.getExtras();
-                        try {
-                            Bitmap bitmap = (Bitmap) bundle.get("data");
-                            uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
-                            Uri[] results = new Uri[]{uri};
-                            mUploadMessageArray.onReceiveValue(results);
-                        } catch (Exception e) {
-                            //当不拍照返回相机时，获取到uri也没数据。
-                            mUploadMessageArray.onReceiveValue(null);
-                        }
-                    } else {
-                        Uri[] results = new Uri[]{uri};
-                        mUploadMessageArray.onReceiveValue(results);
+            if (uri[0] == null) {
+                Log.i("TAG", String.valueOf(data));
+                Bundle bundle = data.getExtras();
+                String path = getCacheDir().getAbsolutePath();
+
+                try {
+                    try {
+                        Luban.with(this)
+                                .load(mFilePath)
+                                .ignoreBy(600)
+                                .setTargetDir(path)
+                                .filter(new CompressionPredicate() {
+                                    @Override
+                                    public boolean apply(String path) {
+                                        return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                                    }
+                                })
+                                .setCompressListener(new OnCompressListener() {
+                                    @Override
+                                    public void onStart() {
+                                    }
+
+                                    @Override
+                                    public void onSuccess(File file) {
+                                        // 获取输入流
+                                        Uri[] results = new Uri[]{Uri.fromFile(file)};
+                                        mUploadMessageArray.onReceiveValue(results);
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        Log.d("uploadPic", e.toString());
+                                    }
+                                }).launch();
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
-                } else {
-                    Log.i("TAG", "onReceveValue");
+                } catch (Exception e) {
+                    //当不拍照返回相机时，获取到uri也没数据。
                     mUploadMessageArray.onReceiveValue(null);
                 }
-                break;
-            case 20:
-                if (data != null) {
-                    Log.i("TAG", "? 走到" );
-                     Uri[] uri = {data.getData()};
+            } else {
+                Uri[] results = new Uri[]{uri[0]};
+                mUploadMessageArray.onReceiveValue(results);
+            }
 
-                    if (uri[0] == null) {
-                        Log.i("TAG", String.valueOf(data));
-                        Bundle bundle = data.getExtras();
-                        String path = getCacheDir().getAbsolutePath();
-
-                        try {
-                            try {
-                                Luban.with(this)
-                                        .load(mFilePath)
-                                        .ignoreBy(500)
-                                        .setTargetDir(path)
-                                        .filter(new CompressionPredicate() {
-                                            @Override
-                                            public boolean apply(String path) {
-                                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                                            }
-                                        })
-                                        .setCompressListener(new OnCompressListener() {
-                                            @Override
-                                            public void onStart() {
-                                            }
-
-                                            @Override
-                                            public void onSuccess(File file) {
-                                                // 获取输入流
-                                                Uri[] results = new Uri[]{Uri.fromFile(file)};
-                                                mUploadMessageArray.onReceiveValue(results);
-                                            }
-
-                                            @Override
-                                            public void onError(Throwable e) {
-                                                Log.d("uploadPic", e.toString());
-                                            }
-                                        }).launch();
-
-
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-
-                        } catch (Exception e) {
-                            //当不拍照返回相机时，获取到uri也没数据。
-                            mUploadMessageArray.onReceiveValue(null);
-                        }
-                    } else {
-                        Uri[] results = new Uri[]{uri[0]};
-                        mUploadMessageArray.onReceiveValue(results);
-                    }
-
-                } else {
-                    Log.i("TAG", "onReceveValue");
-                    mUploadMessageArray.onReceiveValue(null);
-                }
-
-                break;
+        } else {
+            Log.i("TAG", "onReceveValue");
+            mUploadMessageArray.onReceiveValue(null);
         }
 
 
