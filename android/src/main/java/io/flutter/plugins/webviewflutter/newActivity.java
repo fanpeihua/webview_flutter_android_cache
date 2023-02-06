@@ -57,9 +57,6 @@ public class newActivity extends Activity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-        mFilePath = Environment.getExternalStorageDirectory().getPath();
-        // 保存图片的文件名
-        mFilePath = mFilePath + "/" + "mytest"+System.currentTimeMillis() + ".png";
 
         showBottomDialog();
 
@@ -72,10 +69,13 @@ public class newActivity extends Activity {
         intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
 //        intent.setType("*/*");
 //        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(intent, 1);
+        startActivityForResult(intent, 10);
     }
 
     private void openCamera() {
+        mFilePath = Environment.getExternalStorageDirectory().getPath();
+        // 保存图片的文件名
+        mFilePath = mFilePath + "/" + "mytest"+System.currentTimeMillis() + ".jpg";
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -87,7 +87,7 @@ public class newActivity extends Activity {
             Uri mUri = Uri.fromFile(new File(mFilePath));
             // 指定存储路径，这样就可以保存原图了
             openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mUri);
-            startActivityForResult(openCameraIntent, 2);
+            startActivityForResult(openCameraIntent, 20);
         }
     }
 
@@ -105,7 +105,7 @@ public class newActivity extends Activity {
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraTempUri);
                 intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
             }
-            startActivityForResult(intent, 2);
+            startActivityForResult(intent, 20);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -244,7 +244,7 @@ public class newActivity extends Activity {
         //防止退出时，data没有数据，导致闪退。
         Log.i("TAG", "forResult");
         switch (requestCode) {
-            case 1:
+            case 10:
                 if (data != null) {
                     Uri uri = data.getData();
                     Log.i("TAG", "! " + data.getClass() + " * " + data);
@@ -274,8 +274,9 @@ public class newActivity extends Activity {
                     mUploadMessageArray.onReceiveValue(null);
                 }
                 break;
-            case 2:
+            case 20:
                 if (data != null) {
+                    Log.i("TAG", "? 走到" );
                      Uri[] uri = {data.getData()};
 
                     if (uri[0] == null) {
@@ -284,7 +285,6 @@ public class newActivity extends Activity {
                         String path = getCacheDir().getAbsolutePath();
 
                         try {
-                             FileInputStream[] is = {null};
                             try {
                                 Luban.with(this)
                                         .load(mFilePath)
