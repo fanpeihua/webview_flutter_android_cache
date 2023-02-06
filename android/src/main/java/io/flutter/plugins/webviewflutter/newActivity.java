@@ -3,6 +3,7 @@ package io.flutter.plugins.webviewflutter;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -28,13 +29,27 @@ import androidx.core.content.ContextCompat;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
+import com.luck.picture.lib.basic.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.config.PictureSelectionConfig;
+import com.luck.picture.lib.config.SelectMimeType;
+import com.luck.picture.lib.engine.CompressFileEngine;
+import com.luck.picture.lib.engine.UriToFileTransformEngine;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.luck.picture.lib.interfaces.OnKeyValueResultCallbackListener;
+import com.luck.picture.lib.interfaces.OnResultCallbackListener;
+import com.luck.picture.lib.interfaces.OnSelectLimitTipsListener;
+import com.luck.picture.lib.utils.SandboxTransformUtils;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
+import top.zibin.luban.OnNewCompressListener;
 
 public class newActivity extends Activity {
     private static ValueCallback<Uri[]> mUploadMessageArray;
@@ -58,29 +73,83 @@ public class newActivity extends Activity {
     }
 
     private void openAblum() {
-        Intent intent = new Intent(Intent.ACTION_PICK);//任意类型文件
-        intent.setDataAndType(MediaStore.Images.Media.INTERNAL_CONTENT_URI, "image/*");
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-//        intent.setType("*/*");
-//        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        startActivityForResult(intent, 1);
+        PictureSelector.create(this)
+                .openGallery(SelectMimeType.ofImage())
+                .setImageEngine(GlideEngine.createGlideEngine())
+                .setMaxSelectNum(1)
+                .setCompressEngine(new CompressFileEngine() {
+                    @Override
+                    public void onStartCompress(Context context, ArrayList<Uri> source, OnKeyValueResultCallbackListener call) {
+                        Luban.with(context).load(source).ignoreBy(600)
+                                .setCompressListener(new OnNewCompressListener() {
+                                    @Override
+                                    public void onStart() {
+
+                                    }
+
+                                    @Override
+                                    public void onSuccess(String source, File compressFile) {
+                                        if (call != null) {
+                                            call.onCallback(source, compressFile.getAbsolutePath());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onError(String source, Throwable e) {
+                                        if (call != null) {
+                                            call.onCallback(source, null);
+                                        }
+                                    }
+                                }).launch();
+                    }
+                })
+                .setSandboxFileEngine(new UriToFileTransformEngine() {
+                    @Override
+                    public void onUriToFileAsyncTransform(Context context, String srcPath, String mineType, OnKeyValueResultCallbackListener call) {
+                        if (call != null) {
+                            String sandboxPath = SandboxTransformUtils.copyPathToSandbox(context, srcPath, mineType);
+                            call.onCallback(srcPath, sandboxPath);
+                        }
+                    }
+                })
+                .forResult(new OnResultCallbackListener<LocalMedia>() {
+                    @Override
+                    public void onResult(ArrayList<LocalMedia> result) {
+                        if (result != null) {
+                            LocalMedia media = result.get(0);
+                            Uri[] results = new Uri[]{Uri.fromFile(new File(media.getCompressPath()))};
+                            mUploadMessageArray.onReceiveValue(results);
+                        }
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
     }
 
     private void openCamera() {
+        PictureSelector.create(this)
+                .openCamera(SelectMimeType.ofImage())
+                .forResult(new OnResultCallbackListener<LocalMedia>() {
+                    @Override
+                    public void onResult(ArrayList<LocalMedia> result) {
+                        if (result != null) {
+                            LocalMedia media = result.get(0);
+                            Uri[] results = new Uri[]{Uri.fromFile(new File(media.getCompressPath()))};
+                            mUploadMessageArray.onReceiveValue(results);
+                        }
+                    }
 
-        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); //系统常量， 启动相机的关键
-        File path = new File(camera_path);
-        if (!path.exists()) {
-            path.mkdirs();
-        }
+                    @Override
+                    public void onCancel() {
 
-        camera_photo_name = System.currentTimeMillis() + ".jpg";
-        File file = new File(path, camera_photo_name);
-        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+                    }
+                });
 
-        startActivityForResult(openCameraIntent, 2); // 参数常量为自定义的request code, 在取返回结果时有用
     }
+
 
     private void showBottomDialog() {
         //1、使用Dialog、设置style
@@ -208,68 +277,43 @@ public class newActivity extends Activity {
 //        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 //    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //防止退出时，data没有数据，导致闪退。
-        Log.i("TAG", "forResult");
-        if (requestCode == 2) {
-            String mFilePath = camera_path + "/" + camera_photo_name;
-            String path = getCacheDir().getAbsolutePath();
-
-            Luban.with(this)
-                    .load(mFilePath)
-                    .ignoreBy(600)
-                    .setTargetDir(path)
-                    .filter(new CompressionPredicate() {
-                        @Override
-                        public boolean apply(String path) {
-                            return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                        }
-                    })
-                    .setCompressListener(new OnCompressListener() {
-                        @Override
-                        public void onStart() {
-                        }
-
-                        @Override
-                        public void onSuccess(File file) {
-                            // 获取输入流
-                            Uri[] results = new Uri[]{Uri.fromFile(file)};
-                            mUploadMessageArray.onReceiveValue(results);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            Log.i("TAG", e.toString());
-                        }
-                    }).launch();
-        } else {
-            if (data != null) {
-                Uri uri = data.getData();
-                Log.i("TAG", "! " + data.getClass() + " * " + data);
-                Log.i("TAG", "URi " + uri);
-
-                if (uri == null) {
-                    //好像时部分机型会出现的问题，我的mix3就遇到了。
-                    //拍照返回的时候uri为空，但是data里有inline-data。
-                    Log.i("TAG", String.valueOf(data));
-
-                } else {
-
-                    Uri[] results = new Uri[]{uri};
-                    mUploadMessageArray.onReceiveValue(results);
-                }
-
-            } else {
-                Log.i("TAG", "onReceveValue");
-                mUploadMessageArray.onReceiveValue(null);
-            }
-        }
-
-
-        finish();
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        //防止退出时，data没有数据，导致闪退。
+//        Log.i("TAG", "forResult");
+//        if (requestCode == 2) {
+//
+//                            // 获取输入流
+//                            Uri[] results = new Uri[]{Uri.fromFile(file)};
+//                            mUploadMessageArray.onReceiveValue(results);
+//
+//        } else {
+//            if (data != null) {
+//                Uri uri = data.getData();
+//                Log.i("TAG", "! " + data.getClass() + " * " + data);
+//                Log.i("TAG", "URi " + uri);
+//
+//                if (uri == null) {
+//                    //好像时部分机型会出现的问题，我的mix3就遇到了。
+//                    //拍照返回的时候uri为空，但是data里有inline-data。
+//                    Log.i("TAG", String.valueOf(data));
+//
+//                } else {
+//
+//                    Uri[] results = new Uri[]{uri};
+//                    mUploadMessageArray.onReceiveValue(results);
+//                }
+//
+//            } else {
+//                Log.i("TAG", "onReceveValue");
+//                mUploadMessageArray.onReceiveValue(null);
+//            }
+//        }
+//
+//
+//        finish();
+//    }
 
 
 }
