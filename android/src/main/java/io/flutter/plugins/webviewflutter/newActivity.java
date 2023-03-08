@@ -46,7 +46,6 @@ public class newActivity extends Activity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
         showBottomDialog();
-
     }
 
     private void openAblum() {
@@ -250,9 +249,11 @@ public class newActivity extends Activity {
                     case PictureConfig.CHOOSE_REQUEST:
                         if (data != null) {
                             List<LocalMedia> localMedia = PictureSelector.obtainMultipleResult(data);
-                            LocalMedia media = localMedia.get(0);
-                            Uri[] results = new Uri[]{Uri.fromFile(new File(media.getCompressPath()))};
-                            mUploadMessageArray.onReceiveValue(results);
+                            if (localMedia != null && localMedia.size() > 0){
+                                LocalMedia media = localMedia.get(0);
+                                Uri[] results = new Uri[]{Uri.fromFile(new File(media.getCompressPath()))};
+                                mUploadMessageArray.onReceiveValue(results);
+                            }
                         }
                         break;
                     case PictureConfig.REQUEST_CAMERA:
