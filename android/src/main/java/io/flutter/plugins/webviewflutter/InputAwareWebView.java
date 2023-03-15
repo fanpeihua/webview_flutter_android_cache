@@ -16,6 +16,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.ListPopupWindow;
 
+import com.yonghui.cachewebview.CacheWebView;
+
 /**
  * A WebView subclass that mirrors the same implementation hacks that the system WebView does in
  * order to correctly create an InputConnection.
@@ -26,7 +28,7 @@ import android.widget.ListPopupWindow;
  *
  * <p>See also {@link ThreadedInputConnectionProxyAdapterView}.
  */
-class InputAwareWebView extends WebView {
+class InputAwareWebView extends CacheWebView {
   private static final String TAG = "InputAwareWebView";
   private View threadedInputConnectionProxyView;
   private ThreadedInputConnectionProxyAdapterView proxyAdapterView;
