@@ -6,6 +6,9 @@ package io.flutter.plugins.webviewflutter;
 
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import com.yonghui.cachewebview.CacheWebView;
+
 import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.WebSettingsHostApi;
 
 /**
@@ -44,7 +47,7 @@ public class WebSettingsHostApiImpl implements WebSettingsHostApi {
 
   @Override
   public void create(Long instanceId, Long webViewInstanceId) {
-    final WebView webView = (WebView) instanceManager.getInstance(webViewInstanceId);
+    final CacheWebView webView = (CacheWebView) instanceManager.getInstance(webViewInstanceId);
     instanceManager.addInstance(webSettingsCreator.createWebSettings(webView), instanceId);
   }
 

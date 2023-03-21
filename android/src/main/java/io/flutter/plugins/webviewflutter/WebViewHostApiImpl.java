@@ -7,6 +7,7 @@ package io.flutter.plugins.webviewflutter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.display.DisplayManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.DownloadListener;
@@ -362,10 +363,11 @@ public class WebViewHostApiImpl implements WebViewHostApi {
         (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
     displayListenerProxy.onPreWebViewInitialization(displayManager);
 
-    final CacheWebView webView =
+     CacheWebView webView =
         useHybridComposition
             ? webViewProxy.createWebView(context)
             : webViewProxy.createInputAwareWebView(context, containerView);
+     webView.setCacheMode(CacheMode.CACHE);
 
     displayListenerProxy.onPostWebViewInitialization(displayManager);
     instanceManager.addInstance(webView, instanceId);
@@ -497,6 +499,7 @@ public class WebViewHostApiImpl implements WebViewHostApi {
   @Override
   public void setWebViewClient(Long instanceId, Long webViewClientInstanceId) {
     final CacheWebView webView = (CacheWebView) instanceManager.getInstance(instanceId);
+    Log.d("fphLoad", "cachewebview 加载");
     webView.setCacheMode(CacheMode.CACHE);
     webView.setWebViewClient((WebViewClient) instanceManager.getInstance(webViewClientInstanceId));
   }
