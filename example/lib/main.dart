@@ -110,7 +110,8 @@ class _WebViewExampleState extends State<_WebViewExample> {
         ],
       ),
       body: WebView(
-        initialUrl: 'https://mobile.ant.design/~demos/image-uploader-demo2/',
+        // initialUrl: 'https://mobile.ant.design/~demos/image-uploader-demo2/',
+        initialUrl: 'https://www.baidu.com',
         onWebViewCreated: (WebViewController controller) {
           _controller.complete(controller);
         },

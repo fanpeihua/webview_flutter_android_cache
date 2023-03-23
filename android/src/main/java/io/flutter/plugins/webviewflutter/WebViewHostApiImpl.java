@@ -20,6 +20,9 @@ import io.flutter.plugins.webviewflutter.DownloadListenerHostApiImpl.DownloadLis
 import io.flutter.plugins.webviewflutter.GeneratedAndroidWebView.WebViewHostApi;
 import io.flutter.plugins.webviewflutter.WebChromeClientHostApiImpl.WebChromeClientImpl;
 import io.flutter.plugins.webviewflutter.WebViewClientHostApiImpl.ReleasableWebViewClient;
+import ren.yale.android.cachewebviewlib.WebViewCacheInterceptor;
+import ren.yale.android.cachewebviewlib.WebViewCacheInterceptorInst;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -342,6 +345,9 @@ public class WebViewHostApiImpl implements WebViewHostApi {
     this.webViewProxy = webViewProxy;
     this.context = context;
     this.containerView = containerView;
+
+    WebViewCacheInterceptorInst.getInstance().
+            init(new WebViewCacheInterceptor.Builder(context));
   }
 
   /**
@@ -366,6 +372,10 @@ public class WebViewHostApiImpl implements WebViewHostApi {
             : webViewProxy.createInputAwareWebView(context, containerView);
 
     displayListenerProxy.onPostWebViewInitialization(displayManager);
+
+
+
+
     instanceManager.addInstance(webView, instanceId);
   }
 

@@ -11,6 +11,7 @@ import android.os.Build;
 import android.view.KeyEvent;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
@@ -18,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.webkit.WebResourceErrorCompat;
 import androidx.webkit.WebViewClientCompat;
+
+import ren.yale.android.cachewebviewlib.WebViewCacheInterceptorInst;
 
 /**
  * Host api implementation for {@link WebViewClient}.
@@ -173,6 +176,18 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
         flutterApi.requestLoading(this, view, request, reply -> {});
       }
       return shouldOverrideUrlLoading;
+    }
+
+    @Nullable
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+      return WebViewCacheInterceptorInst.getInstance().interceptRequest(request);
+    }
+
+    @Nullable
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+      return WebViewCacheInterceptorInst.getInstance().interceptRequest(url);
     }
 
     @Override
