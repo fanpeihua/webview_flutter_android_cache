@@ -101,6 +101,19 @@ public class WebViewClientHostApiImpl implements GeneratedAndroidWebView.WebView
       return shouldOverrideUrlLoading;
     }
 
+    @Nullable
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+      return WebViewCacheInterceptorInst.getInstance().interceptRequest(request);
+    }
+
+
+    @Nullable
+    @Override
+    public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+      return WebViewCacheInterceptorInst.getInstance().interceptRequest(url);
+    }
+
     @Override
     public void onUnhandledKeyEvent(WebView view, KeyEvent event) {
       // Deliberately empty. Occasionally the webview will mark events as having failed to be
