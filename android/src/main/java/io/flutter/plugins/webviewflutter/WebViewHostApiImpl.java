@@ -22,6 +22,7 @@ import io.flutter.plugins.webviewflutter.WebChromeClientHostApiImpl.WebChromeCli
 import io.flutter.plugins.webviewflutter.WebViewClientHostApiImpl.ReleasableWebViewClient;
 import ren.yale.android.cachewebviewlib.WebViewCacheInterceptor;
 import ren.yale.android.cachewebviewlib.WebViewCacheInterceptorInst;
+import ren.yale.android.cachewebviewlib.config.CacheExtensionConfig;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -365,6 +366,14 @@ public class WebViewHostApiImpl implements WebViewHostApi {
     DisplayManager displayManager =
         (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
     displayListenerProxy.onPreWebViewInitialization(displayManager);
+
+
+    // 基础配置
+    WebViewCacheInterceptor.Builder builder =  new WebViewCacheInterceptor.Builder(context);
+    CacheExtensionConfig extension = new CacheExtensionConfig();
+    extension.removeExtension("html").removeExtension("htm"); // 删除缓存后缀
+    builder.setCacheExtensionConfig(extension);
+    WebViewCacheInterceptorInst.getInstance().init(builder);
 
     final WebView webView =
         useHybridComposition
