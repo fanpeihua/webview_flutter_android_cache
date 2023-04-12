@@ -1,4 +1,4 @@
-name: webview_flutter_android
+name: webview_flutter_android_cache
 description: A Flutter plugin that provides a WebView widget on Android.
 repository: https://github.com/flutter/plugins/tree/main/packages/webview_flutter/webview_flutter_android
 issue_tracker: https://github.com/flutter/flutter/issues?q=is%3Aissue+is%3Aopen+label%3A%22p%3A+webview%22

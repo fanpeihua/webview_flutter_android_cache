@@ -26,7 +26,7 @@ import '../lib/src/android_webview.pigeon.dart';
 to
 
 ```dart
-import 'package:webview_flutter_android/src/android_webview.pigeon.dart';
+import 'package:webview_flutter_android_cache/src/android_webview.pigeon.dart';
 ```
 
 Besides [pigeon][3] this package also uses [mockito][4] to generate mock objects for testing

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:webview_flutter_android/src/android_webview.dart'
+import 'package:webview_flutter_android_cache/src/android_webview.dart'
     as android_webview;
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 

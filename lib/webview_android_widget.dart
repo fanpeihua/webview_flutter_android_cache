@@ -6,7 +6,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
-import 'package:webview_flutter_android/webview_android_cookie_manager.dart';
+import 'package:webview_flutter_android_cache/webview_android_cookie_manager.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
 import 'src/android_webview.dart' as android_webview;
